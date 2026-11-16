@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Outlet 150 BPM · Óculos e Panos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Bricolage+Grotesque:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="aura"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
+<div id="glow"></div>
+
+<nav>
+  <a class="logo" href="#topo">OUTLET<i>150BPM</i></a>
+  <button class="cartbtn" id="openCart" aria-label="Abrir carrinho">Carrinho <b id="count">0</b></button>
+</nav>
+
+<header class="hero" id="topo">
+  <svg class="mandala" id="mandala" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+  <div>
+    <h1>Óculos<span>Oakley</span>nas base</h1>
+    <p>Peças originais e primeira linha. Vem ficar chave por um precinho que cabe no seu bolso. Afinal, tem que sobrar pro baile ne?!</p>
+    <a class="cta" href="#produtos">Ver os modelos</a>
+    <a class="cta cta-secondary" href="#roupas">Ver roupas</a>
+  </div>
+  <div class="heroglass" aria-hidden="true"><img src="img_9245-f2700f9b2564de8a2217201442233516-1024-1024-removebg-preview.png" alt=""></div>
+</header>
+
+<div class="marq" aria-hidden="true"><div id="marq"></div></div>
+
+<main>
+<section id="roupas">
+  <h2>Roupas da pista</h2>
+  <p class="sub">Camisetas e bermudas para completar o visual. Escolha o tamanho e consulte cores, disponibilidade e valores pelo WhatsApp.</p>
+  <div class="grid" id="clothingGrid"></div>
+</section>
+
+<section id="produtos">
+  <h2>Outlet da pista</h2>
+  <p class="sub">Troque a cor da lente em cada modelo antes de adicionar. O pedido vai com tudo escrito para o WhatsApp.</p>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Todos</button><button data-f="Esporte">Esporte</button><button data-f="Rua">Rua</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="como">
+  <h2>Três toques e já é seu</h2>
+  <ol class="steps">
+    <li><b>Monte o carrinho</b><span>Escolha o modelo, a cor da lente ou o tamanho da roupa. Pode levar mais de um.</span></li>
+    <li><b>Envie pelo WhatsApp</b><span>O resumo do pedido já sai pronto na conversa com a loja.</span></li>
+    <li><b>Combine e receba</b><span>Confirmamos estoque, pagamento e entrega por lá mesmo.</span></li>
+  </ol>
+</section>
+</main>
+
+<footer><span>Outlet 150BPM · Produtos sujeitos a disponibilidade de estoque</span><span>Atendimento pelo WhatsApp</span></footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Carrinho">
+  <header><h4>Seu carrinho</h4><button class="x" id="closeCart" aria-label="Fechar carrinho">✕</button></header>
+  <div class="items" id="items"></div>
+  <div class="shipping-total"><span>Frete</span><b id="shippingCost">Calcule o CEP</b></div>
+  <div class="total"><span id="totalLabel">Subtotal</span><b id="total">R$ 0,00</b></div>
+  <div class="ck">
+    <input id="cNome" autocomplete="name" placeholder="Seu nome" maxlength="80">
+    <input id="cFone" type="tel" autocomplete="tel" placeholder="WhatsApp com DDD" maxlength="20">
+    <label class="delivery-label" for="entrega">Forma de entrega</label>
+    <select id="entrega">
+      <option value="entrega">Entrega (frete por região)</option>
+      <option value="retirada">Retirada presencial sem custo</option>
+    </select>
+    <div class="delivery-fields" id="deliveryFields">
+      <div class="cep-row">
+        <input id="cCep" inputmode="numeric" autocomplete="postal-code" placeholder="CEP de entrega" maxlength="9" aria-label="CEP de entrega">
+        <button type="button" class="calc-shipping" id="calcShipping">Calcular</button>
+      </div>
+      <p class="freight-status" id="freightStatus" role="status" aria-live="polite">Informe seu CEP para calcular o frete.</p>
+      <textarea id="cEnd" rows="2" autocomplete="street-address" placeholder="Endereço de entrega (rua, número e bairro)" maxlength="250"></textarea>
+    </div>
+  </div>
+  <button class="pay" id="pay" disabled>Gerar QR Code Pix</button>
+  <p class="err" id="payErr" role="alert"></p>
+  <p class="note" id="payNote"></p>
+  <div class="pix-payment" id="pixPayment" aria-label="Pagamento Pix" hidden>
+    <p>Escaneie o QR Code ou copie o código Pix. Depois, envie o comprovante pelo WhatsApp.</p>
+    <div class="pix-qr" id="pixQr" role="img" aria-label="QR Code Pix do pedido"></div>
+    <label for="pixCode">Pix copia e cola</label>
+    <textarea id="pixCode" rows="4" readonly aria-label="Código Pix copia e cola"></textarea>
+    <button class="copy-pix" id="copyPix" type="button">Copiar código Pix</button>
+    <p class="pix-status" id="pixStatus" role="status" aria-live="polite"></p>
+  </div>
+  <a class="wa alt" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Prefiro finalizar no WhatsApp</a>
+</aside>
+
+<script src="produtos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+
+/* ============================ */
+
+const $=s=>document.querySelector(s), fmt=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+let cart=[], uid=0, cotacaoFrete=null, cotacaoRequest=0;
+const PIX_KEY="+5567993319111", PIX_RECEIVER="Dirceu de Souza Gameiro", PIX_CITY="Campo Grande";
+
+function glasses(c1,c2,id,frame="#f4eeff"){
+  return `<svg viewBox="0 0 200 80" aria-hidden="true"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+  <path d="M8 26 Q100 4 192 26 L186 50 Q172 72 140 67 Q110 62 104 42 L96 42 Q90 62 60 67 Q28 72 14 50 Z" fill="url(#g${id})" stroke="${frame}" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M22 30 Q60 20 92 30" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M112 30 Q146 20 180 30" stroke="#fff" stroke-opacity=".4" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+}
+
+function clothing(kind,color,id){
+  const shape=kind=="shirt"
+    ?`<path d="M66 20 82 12h36l16 8 24 20-16 20-13-10v65H71V50L58 60 42 40z" fill="url(#c${id})" stroke="#f4eeff" stroke-width="4" stroke-linejoin="round"/><path d="M82 13q18 17 36 0" fill="none" stroke="#f4eeff" stroke-width="3"/><path d="M85 62h30" stroke="#f4eeff" stroke-opacity=".65" stroke-width="4" stroke-linecap="round"/>`
+    :`<path d="M53 18h94l-5 41-13 57h-31l-4-48-4 48H59L48 59z" fill="url(#c${id})" stroke="#f4eeff" stroke-width="4" stroke-linejoin="round"/><path d="M52 29h93M100 20v47" stroke="#f4eeff" stroke-opacity=".65" stroke-width="3"/><circle cx="100" cy="24" r="3" fill="#f4eeff"/>`;
+  return `<svg viewBox="0 0 200 140" aria-hidden="true"><defs><linearGradient id="c${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="#150a2e"/></linearGradient></defs>${shape}</svg>`;
+}
+
+/* mandala trance */
+(()=>{let h="";for(let r=1;r<=5;r++){const n=6+r*4,rad=r*34;for(let i=0;i<n;i++){const a=i*360/n;h+=`<ellipse cx="0" cy="${-rad}" rx="${10+r*2.5}" ry="${22+r*3}" transform="rotate(${a})" fill="none" stroke="${["#1ff2e0","#ff2d9b","#ffd23f","#6a2cff","#1ff2e0"][r-1]}" stroke-width=".7"/>`}}
+$("#mandala").innerHTML=h})();
+
+const words=["BAILE","BASS","150 BPM","PSY","TRANCE","FUNK","ORIGINAL","OUTLET","LENTE PRIZM","SEM FILA"];
+$("#marq").innerHTML=[...words,...words].map(w=>`<span>${w}</span>`).join("");
+
+/* grid */
+$("#grid").innerHTML=PRODUTOS.filter(p=>!p.kind).map(p=>`
+<article class="card" data-c="${p.c}" data-id="${p.id}" style="--glow:${p.l[0][1]}66">
+  <span class="tag">-${Math.round((1-p.p/p.o)*100)}%</span>
+  <div class="stage">${p.img?`<img src="${p.img}" alt="${p.n}" loading="lazy">`:glasses(p.l[0][1],p.l[0][2],"p"+p.id)}</div>
+  <h3>${p.n}</h3><small>${p.t} · ${p.c}</small>
+  <div class="lens" role="group" aria-label="Cor da lente">${p.l.map((l,i)=>`<button class="${i?"":"on"}" data-i="${i}" title="${l[0]}" aria-label="${l[0]}" style="background:linear-gradient(135deg,${l[1]},${l[2]})"></button>`).join("")}</div>
+  <div class="buy"><div class="price"><del>${fmt(p.o)}</del><b>${fmt(p.p)}</b></div><button class="add">Adicionar</button></div>
+</article>`).join("");
+
+const roupa=PRODUTOS.filter(p=>p.kind);
+$("#clothingGrid").innerHTML=roupa.map(p=>`
+<article class="card clothing-card" data-id="${p.id}" style="--glow:${p.color}66">
+  <div class="stage">${p.img?`<img src="${p.img}" alt="${p.n}" loading="lazy">`:clothing(p.kind,p.color,"item"+p.id)}</div>
+  <h3>${p.n}</h3><small>${p.t}</small>
+  <div class="sizes" role="group" aria-label="Tamanho">${p.l.map((l,i)=>`<button class="${i?"":"on"}" data-i="${i}" aria-pressed="${i?"false":"true"}">${l[0]}</button>`).join("")}</div>
+  <div class="buy"><div class="price">${p.p==null?'<b class="consult">Consulte</b>':'<b>'+fmt(p.p)+'</b>'}</div><button class="add">Adicionar</button></div>
+</article>`).join("");
+
+$("main").addEventListener("click",e=>{
+  const card=e.target.closest(".card"); if(!card) return;
+  const p=PRODUTOS.find(x=>x.id==card.dataset.id);
+  const choice=e.target.closest(".lens button, .sizes button");
+  if(choice){
+    card.querySelectorAll(".lens button, .sizes button").forEach(b=>{b.classList.remove("on");b.setAttribute("aria-pressed","false")});
+    choice.classList.add("on"); choice.setAttribute("aria-pressed","true");
+    const lb=choice.closest(".lens")?choice:null;
+    if(lb){
+    const l=p.l[lb.dataset.i]; if(!p.img)card.querySelector(".stage").innerHTML=glasses(l[1],l[2],"p"+p.id); card.style.setProperty("--glow",l[1]+"66");
+    }
+  }
+  if(e.target.closest(".add")){
+    const i=+card.querySelector(".lens .on, .sizes .on").dataset.i, key=p.id+"-"+i, f=cart.find(x=>x.key==key);
+    f?f.q++:cart.push({key,p,i,q:1});
+    const b=e.target.closest(".add"); b.textContent="Adicionado"; b.classList.add("ok");
+    setTimeout(()=>{b.textContent="Adicionar";b.classList.remove("ok")},1200);
+    render(); const cb=$("#openCart"); cb.classList.add("pop"); setTimeout(()=>cb.classList.remove("pop"),350);
+  }
+});
+$("#filters").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("on",x==b));
+  document.querySelectorAll("#grid .card").forEach(c=>c.classList.toggle("hide",b.dataset.f!="all"&&c.dataset.c!=b.dataset.f));
+});
+
+/* carrinho */
+function render(){
+  const n=cart.reduce((s,x)=>s+x.q,0), hasUnpriced=cart.some(x=>x.p.p==null), tot=cart.reduce((s,x)=>s+x.q*(x.p.p||0),0);
+  const temCotacao=!!cotacaoFrete, totalComFrete=tot+(temCotacao?cotacaoFrete.valor:0);
+  $("#pixPayment").hidden=true;
+  $("#pixQr").replaceChildren();
+  $("#pixCode").value="";
+  $("#pixStatus").textContent="";
+  $("#count").textContent=n;
+  $("#shippingCost").textContent=!temCotacao?"Calcule o CEP":cotacaoFrete.tipo=="retirada"?"Grátis":fmt(cotacaoFrete.valor);
+  $("#totalLabel").textContent=temCotacao?"Total":"Subtotal";
+  $("#total").textContent=hasUnpriced?"A confirmar":fmt(totalComFrete);
+  $("#items").innerHTML=cart.length?cart.map(x=>{const l=x.p.l[x.i], art=x.p.img?`<img src="${x.p.img}" alt="${x.p.n}">`:x.p.kind?clothing(x.p.kind,x.p.color,"c"+(uid++)):glasses(l[1],l[2],"c"+(uid++));return `
+  <div class="it"><div>${art}</div>
+  <div><b>${x.p.n}</b><small>${x.p.kind?"Tamanho "+l[0]:l[0]} · ${x.p.p==null?"valor a confirmar":fmt(x.p.p)}</small>
+  <div class="qty"><button data-a="m" data-k="${x.key}" aria-label="Diminuir">−</button><span>${x.q}</span><button data-a="p" data-k="${x.key}" aria-label="Aumentar">+</button></div></div>
+  <button class="rm" data-a="r" data-k="${x.key}">remover</button></div>`}).join(""):`<p class="empty">Nada por aqui ainda.<br>Escolha um modelo e solte o grave.</p>`;
+  const pay=$("#pay"); pay.disabled=!cart.length||hasUnpriced||!temCotacao;
+  $("#payNote").textContent=hasUnpriced?"Itens “Consulte” são combinados pelo WhatsApp.":!temCotacao?"Calcule o frete pelo CEP ou escolha retirada presencial para continuar.":"O QR Code Pix será gerado com o valor total do pedido.";
+  const wa=$("#wa");
+  if(cart.length){
+    const linhas=cart.map(x=>`• ${x.q}x ${x.p.n} (${x.p.kind?"tamanho ":""}${x.p.l[x.i][0]}) - ${x.p.p==null?"valor a confirmar":fmt(x.q*x.p.p)}`).join("\n");
+    const entrega=temCotacao?(cotacaoFrete.tipo=="retirada"?"Retirada presencial (grátis)":`CEP ${cotacaoFrete.cep} · ${cotacaoFrete.regiao}: ${fmt(cotacaoFrete.valor)}`):"A calcular";
+    const msg=`Olá, ${LOJA}! Quero fechar este pedido:\n\n${linhas}\n\nEntrega: ${entrega}\nTotal: ${hasUnpriced||!temCotacao?"a confirmar":fmt(totalComFrete)}\n\nPode confirmar disponibilidade e forma de pagamento?`;
+    wa.href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`; wa.removeAttribute("aria-disabled");
+  } else {wa.href="#";wa.setAttribute("aria-disabled","true")}
+}
+
+$("#entrega").addEventListener("change",()=>{
+  cotacaoRequest++;
+  const retirada=$("#entrega").value=="retirada";
+  $("#deliveryFields").hidden=retirada;
+  cotacaoFrete=retirada?{tipo:"retirada",valor:0,regiao:"Retirada presencial"}:null;
+  $("#freightStatus").textContent=retirada?"Retirada presencial sem custo.":"Informe seu CEP para calcular o frete.";
+  render();
+});
+$("#cCep").addEventListener("input",e=>{
+  cotacaoRequest++;
+  const cep=e.target.value.replace(/\D/g,"").slice(0,8);
+  e.target.value=cep.length>5?cep.slice(0,5)+"-"+cep.slice(5):cep;
+  cotacaoFrete=null;
+  $("#freightStatus").textContent="Informe seu CEP e calcule o frete.";
+  render();
+});
+$("#calcShipping").addEventListener("click",async e=>{
+  const button=e.currentTarget, cep=$("#cCep").value.replace(/\D/g,"");
+  if(cep.length!=8){$("#freightStatus").textContent="Digite um CEP válido com 8 números.";return}
+  const request=++cotacaoRequest;
+  button.disabled=true; button.textContent="Calculando…";
+  $("#freightStatus").textContent="Consultando CEP…";
+  try{
+    const response=await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    if(!response.ok)throw new Error("Não foi possível consultar o CEP. Tente novamente.");
+    const endereco=await response.json();
+    if(endereco.erro)throw new Error("CEP não encontrado. Confira os números.");
+    const regiao=REGIAO_POR_UF[endereco.uf];
+    if(!regiao||FRETE_POR_REGIAO[regiao]==null)throw new Error("Não foi possível identificar a região deste CEP.");
+    if(request!=cotacaoRequest)return;
+    cotacaoFrete={tipo:"entrega",cep,uf:endereco.uf,regiao,valor:FRETE_POR_REGIAO[regiao]};
+    $("#freightStatus").textContent=`${endereco.localidade} - ${endereco.uf} · ${regiao}: ${fmt(cotacaoFrete.valor)}`;
+    render();
+  }catch(error){
+    if(request==cotacaoRequest){cotacaoFrete=null;$("#freightStatus").textContent=error.message;render()}
+  }finally{
+    button.disabled=false; button.textContent="Calcular";
+  }
+});
+$("#items").addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]"); if(!b) return;
+  const x=cart.find(c=>c.key==b.dataset.k); if(!x) return;
+  if(b.dataset.a=="p")x.q++; else if(b.dataset.a=="m")x.q--; else x.q=0;
+  cart=cart.filter(c=>c.q>0); render();
+});
+const toggle=v=>document.body.classList.toggle("open",v);
+$("#openCart").onclick=()=>toggle(true); $("#closeCart").onclick=$("#veil").onclick=()=>toggle(false);
+addEventListener("keydown",e=>{if(e.key=="Escape")toggle(false)});
+$("#wa").addEventListener("click",e=>{if(!cart.length)e.preventDefault()});
+
+function pixField(id,value){
+  const text=String(value);
+  return id+String(text.length).padStart(2,"0")+text;
+}
+function crc16(value){
+  let crc=0xFFFF;
+  for(let i=0;i<value.length;i++){
+    crc^=value.charCodeAt(i)<<8;
+    for(let bit=0;bit<8;bit++)crc=crc&0x8000?(crc<<1)^0x1021:crc<<1;
+    crc&=0xFFFF;
+  }
+  return crc.toString(16).toUpperCase().padStart(4,"0");
+}
+function criarPayloadPix(valor){
+  const conta=pixField("00","BR.GOV.BCB.PIX")+pixField("01",PIX_KEY);
+  const campos=[
+    pixField("00","01"),
+    pixField("26",conta),
+    pixField("52","0000"),
+    pixField("53","986"),
+    pixField("54",valor.toFixed(2)),
+    pixField("58","BR"),
+    pixField("59",PIX_RECEIVER),
+    pixField("60",PIX_CITY),
+    pixField("62",pixField("05","***"))
+  ].join("")+"6304";
+  return campos+crc16(campos);
+}
+
+/* QR Pix */
+$("#pay").addEventListener("click",e=>{
+  const err=$("#payErr"), nome=$("#cNome").value.trim(), fone=$("#cFone").value.replace(/\D/g,""), end=$("#cEnd").value.trim();
+  const retirada=$("#entrega").value=="retirada", cep=$("#cCep").value.replace(/\D/g,"");
+  err.textContent="";
+  if(nome.length<2||fone.length<10||(!retirada&&(end.length<8||cep.length!=8))){err.textContent="Preencha nome, WhatsApp e os dados de entrega.";return}
+  if(!cotacaoFrete||(retirada&&cotacaoFrete.tipo!="retirada")||(!retirada&&(cotacaoFrete.tipo!="entrega"||cotacaoFrete.cep!=cep))){err.textContent="Calcule o frete novamente ou selecione a retirada presencial.";return}
+  try{
+    if(typeof QRCode=="undefined")throw new Error("Não foi possível carregar o gerador de QR Code. Atualize a página ou finalize pelo WhatsApp.");
+    const total=cart.reduce((s,x)=>s+x.q*x.p.p,0)+cotacaoFrete.valor;
+    const payload=criarPayloadPix(total);
+    $("#pixQr").replaceChildren();
+    new QRCode($("#pixQr"),{text:payload,width:240,height:240,colorDark:"#0b0518",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+    $("#pixCode").value=payload;
+    $("#pixPayment").hidden=false;
+    $("#pixStatus").textContent=`Valor Pix: ${fmt(total)}`;
+  }catch(ex){err.textContent=ex.message||"Não foi possível gerar o QR Code Pix."}
+});
+$("#copyPix").addEventListener("click",async()=>{
+  const status=$("#pixStatus");
+  try{
+    await navigator.clipboard.writeText($("#pixCode").value);
+    status.textContent="Código Pix copiado.";
+  }catch(_){
+    status.textContent="Não foi possível copiar automaticamente. Selecione e copie o código acima.";
+  }
+});
+
+/* brilho que segue o cursor */
+const g=$("#glow");addEventListener("pointermove",e=>{g.style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
+render();
+</script>
+</body>
+</html>
